@@ -18,11 +18,11 @@ local Cooldowns = {
 }
 
 local Core = {
-	{ 'Glacial Advance' , 'player.rarea(7).enemies >= 1' },
+	{ 'Glacial Advance' , 'player.area(7).enemies >= 1' },
 	--FROST STRIKE OLBITERATION
 	--FROSTSCYTH
 	{ 'Obliterate' , 'player.buff(Killing Machine)' },
-	{ 'Remorseless Winter' , 'player.rarea(7).enemies >= 2' },
+	{ 'Remorseless Winter' , 'player.area(7).enemies >= 2' },
 	{ 'Obliterate' }
 	--Frost
 	--Howling
@@ -40,7 +40,7 @@ local Interrupts = {
 
 local inCombat = {
 	{ Healing },
-	{ Cooldowns , 'player.rarea(7).enemies >= 1' },
+	{ Cooldowns , 'player.area(7).enemies >= 1' },
 	
 	--Core
 	{ 'Howling Blast' , 'target.debuff(Frost Fever).duration <= 3' },
@@ -48,7 +48,7 @@ local inCombat = {
 	{ 'Frost Strike' , 'player.runicpower >= 80' },
 	{ Core },
 --Frost Strike
-	{ 'Horn of Winter' , 'player.rarea(7).enemies >= 1' },
+	{ 'Horn of Winter' , 'player.area(7).enemies >= 1' },
 	{ 'Frost Strike' },
 }
 
