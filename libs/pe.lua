@@ -15,22 +15,6 @@ NeP.DSL.RegisterConditon('rprint', function(text)
 	print(text)
 end)
 
-NeP.DSL.RegisterConditon("rubimarea.enemies", function(unit, distance)
-	local total = 0
-	local distance = tonumber(distance)
-	if UnitExists(unit) then
-		for i=1, #NeP.OM['unitEnemie'] do
-			local Obj = NeP.OM['unitEnemie'][i]
-			if UnitExists(Obj.key) and UnitHealth(Obj.key) > 0 and not UnitIsDeadOrGhost(Obj.key)
-			and (UnitAffectingCombat(Obj.key) or isDummy(Obj.key))
-			and (NeP.Engine.Distance(unit, Obj.key) <= distance) then
-				total = total +1
-			end
-		end
-	end
-	return total
-end)
-
 NeP.DSL.RegisterConditon("areattd", function(target)
 	local ttd = 0
 	local total = 0
