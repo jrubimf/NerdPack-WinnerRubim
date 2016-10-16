@@ -26,8 +26,16 @@ NeP.DSL:Register('blood.rotation', function(target, rotation)
 	return false
 end)
 
-NeP.DSL:Register('rpdeficiet', function(target)
+NeP.DSL:Register('rpdeficit', function(target)
 	return (UnitPowerMax(target, SPELL_POWER_RUNIC_POWER)) - (UnitPower(target, SPELL_POWER_RUNIC_POWER))
+end)
+
+NeP.DSL:Register('energydeficit', function(target)
+	return (UnitPowerMax(target, SPELL_POWER_ENERGY)) - (UnitPower(target, SPELL_POWER_ENERGY))
+end)
+
+NeP.DSL:Register('combodeficit', function(target)
+	return (UnitPowerMax(target, SPELL_POWER_COMBO_POINTS)) - (UnitPower(target, SPELL_POWER_COMBO_POINTS))
 end)
 
 NeP.DSL:Register('rprint', function(text)
@@ -41,7 +49,7 @@ NeP.DSL:Register("rubimarea.enemies", function(unit, distance)
 		for GUID, Obj in pairs(NeP.OM:Get('Enemy')) do
 			if UnitExists(Obj.key) and UnitHealth(Obj.key) > 0 and not UnitIsDeadOrGhost(Obj.key)
 			and (UnitAffectingCombat(Obj.key) or NeP.DSL:Get('isdummy')(Obj.key))
-			and (NeP.Protected.Distance(unit, Obj.key) <= tonumber(distance)) then
+			and NeP.DSL:Get('range')(Obj.key) <= tonumber(distance) then
 				total = total +1
 			end
 		end
