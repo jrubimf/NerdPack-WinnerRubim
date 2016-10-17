@@ -2,9 +2,9 @@ local _, Rubim = ...
 
 local exeOnLoad = function()
 --	NePCR.Splash()
-	Rubim.meleeSpell = 197834
+	Rubim.meleeSpell = 193315
 	print("|cffFFFF00 ----------------------------------------------------------------------|r")
-	print("|cffFFFF00 --- |rCLASS NAME|cffC41F3BOutlaw |r")
+	print("|cffFFFF00 --- |rCLASS NAME: |cffFFF569Outlaw |r")
 	print("|cffFFFF00 --- |rRecommended Talents: 1/1 - 2/3 - 3/1 - 4/0 - 5/1 - 6/2 - 7/2")
 	print("|cffFFFF00 --- |rRead the Readme avaiable at github.")
 	print("|cffFFFF00 ----------------------------------------------------------------------|r")
@@ -60,10 +60,10 @@ local finish = {
 local bf = {
 --# Blade Flurry
 --actions.bf=cancel_buff,name=blade_flurry,if=equipped.shivarran_symmetry&cooldown.blade_flurry.up&buff.blade_flurry.up&spell_targets.blade_flurry>=2|spell_targets.blade_flurry<2&buff.blade_flurry.up
---	{'Blade Flurry', {'player.equipped()', 'player.rubimarea(7).enemies >= 2'}},
+--	{'Blade Flurry', {'player.equipped()', 'player.area(7).enemies >= 2'}},
 --actions.bf+=/blade_flurry,if=spell_targets.blade_flurry>=2&!buff.blade_flurry.up
-	{'Blade Flurry', {'player.rubimarea(7).enemies > 3', '!player.buff(Blade Flurry)'}},
-	{'Blade Flurry', {'player.buff(Blade Flurry)', 'player.rubimarea(7).enemies < 2'}},
+	{'Blade Flurry', {'player.area(7).enemies > 3', '!player.buff(Blade Flurry)'}},
+	{'Blade Flurry', {'player.buff(Blade Flurry)', 'player.area(7).enemies < 2'}},
 }
 
 local cds = {
@@ -74,7 +74,7 @@ local cds = {
 --actions.cds+=/berserking
 --actions.cds+=/arcane_torrent,if=energy.deficit>40
 --actions.cds+=/cannonball_barrage,if=spell_targets.cannonball_barrage>=1
-	{'Cannonball Barrage', 'player.rubimarea(7).enemies <= 2'},
+	{'Cannonball Barrage', 'player.area(7).enemies <= 2'},
 --actions.cds+=/adrenaline_rush,if=!buff.adrenaline_rush.up&energy.deficit>0
 	{'Adrenaline Rush', 'player.energydeficit > 0'},
 --actions.cds+=/marked_for_death,target_if=min:target.time_to_die,if=target.time_to_die<combo_points.deficit|((raid_event.adds.in>40|buff.true_bearing.remains>15)&combo_points.deficit>=4+talent.deeper_strategem.enabled+talent.anticipation.enabled)
