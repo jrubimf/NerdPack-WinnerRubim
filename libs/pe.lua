@@ -37,8 +37,8 @@ NeP.DSL:Register('rpdeficiet', function(target)
 	return (UnitPowerMax(target, SPELL_POWER_RUNIC_POWER)) - (UnitPower(target, SPELL_POWER_RUNIC_POWER))
 end)
 
---/dump NeP.DSL:Get('rage.deficit')()
-NeP.DSL:Register('rage.deficit', function()
+--/dump NeP.DSL:Get('rage.deficiet')()
+NeP.DSL:Register('rage.deficiet', function()
 	return (UnitPowerMax('player')) - (UnitPower('player'))
 end)
 
