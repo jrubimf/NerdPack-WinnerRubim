@@ -174,7 +174,7 @@ local inCombat = {
 --actions+=/run_action_list,name=exsang_combo,if=cooldown.exsanguinate.remains<3&talent.exsanguinate.enabled&(buff.vendetta.up|cooldown.vendetta.remains>25)
 	{ exsang_combo, 'player.talent(6,3)', 'player.spell(Exsanguinate).cooldown < 3', 'player.buff(Vendetta)'},
 --actions+=/call_action_list,name=garrote,if=spell_targets.fan_of_knives<=8-artifact.bag_of_tricks.enabled
-	{'Garrote', {'player.area(7).enemies <=8', 'player.spell(Bag of Tricks).exists' }},
+	{'Garrote'},
 --actions+=/call_action_list,name=exsang,if=dot.rupture.exsanguinated
 	{ exsang, 'target.debuff(Rupture).duration > 10', 'player.lastcast(Exsanguinate)'},
 --actions+=/rupture,if=talent.exsanguinate.enabled&remains-cooldown.exsanguinate.remains<(4+cp_max_spend*4)*0.3&new_duration-cooldown.exsanguinate.remains>=(4+cp_max_spend*4)*0.3+3
