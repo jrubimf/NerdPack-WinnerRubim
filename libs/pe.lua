@@ -33,7 +33,15 @@ NeP.DSL:Register('blood.rotation', function(target, rotation)
 	return false
 end)
 
-NeP.DSL:Register('rpdeficiet', function(target)
+NeP.DSL:Register('energydeficit', function(target)
+	return (UnitPowerMax(target, SPELL_POWER_ENERGY)) - (UnitPower(target, SPELL_POWER_ENERGY))
+end)
+
+NeP.DSL:Register('combodeficit', function(target)
+	return (UnitPowerMax(target, SPELL_POWER_COMBO_POINTS)) - (UnitPower(target, SPELL_POWER_COMBO_POINTS))
+end)
+
+NeP.DSL:Register('rpdeficit', function(target)
 	return (UnitPowerMax(target, SPELL_POWER_RUNIC_POWER)) - (UnitPower(target, SPELL_POWER_RUNIC_POWER))
 end)
 
