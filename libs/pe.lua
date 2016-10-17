@@ -37,8 +37,8 @@ NeP.DSL:Register('rpdeficiet', function(target)
 	return (UnitPowerMax(target, SPELL_POWER_RUNIC_POWER)) - (UnitPower(target, SPELL_POWER_RUNIC_POWER))
 end)
 
---/dump NeP.DSL:Get('rage.deficiet')()
-NeP.DSL:Register('rage.deficiet', function()
+--/dump NeP.DSL:Get('rage.deficit')()
+NeP.DSL:Register('rage.deficit', function()
 	return (UnitPowerMax('player')) - (UnitPower('player'))
 end)
 
@@ -49,8 +49,8 @@ end)
 NeP.DSL:Register("areattd", function(target)
 	local ttd = 0
 	local total = 0
-	for GUID, Obj in pairs(NeP.OM:Get('Enemy')) do
-		if NeP.Protected.Distance("player", Obj.key) <= tonumber(8) and (UnitAffectingCombat(Obj.key) or NeP.DSL:Get('isdummy')(Obj.key)) then
+	for _, Obj in pairs(NeP.OM:Get('Enemy')) do
+		if NeP.DSL:Get('combat')(Obj.key) and NeP.DSL:Get("distance")(Obj.key) <= tonumber(8) then
 			if NeP.DSL:Get("deathin")(Obj.key) < 8 then
 				total = total+1
 				ttd = NeP.DSL:Get("deathin")(Obj.key) + ttd
@@ -69,14 +69,12 @@ NeP.DSL:Register("allstacked", function(target)
 	local allenemies = 0
 	local closeenemies = 0
 	local total = 0
-	for GUID, Obj in pairs(NeP.OM:Get('Enemy')) do
-		if NeP.DSL:Get('combat')(Obj.key)
-		and NeP.Protected.Distance("player", Obj.key) <= tonumber(30) then
+	for _, Obj in pairs(NeP.OM:Get('Enemy')) do
+		if NeP.DSL:Get('combat')(Obj.key) and NeP.Protected.Distance("player", Obj.key) <= tonumber(30) then
 			allenemies = allenemies +1
 		end
 		
-		if NeP.DSL:Get('combat')(Obj.key)
-		and NeP.Protected.Distance("player", Obj.key) <= tonumber(7) then
+		if NeP.DSL:Get('combat')(Obj.key) and NeP.Protected.Distance("player", Obj.key) <= tonumber(8) then
 			closeenemies = closeenemies+1
 		end
 	end
