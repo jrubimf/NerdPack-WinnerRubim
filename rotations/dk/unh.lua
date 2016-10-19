@@ -4,6 +4,12 @@ local exeOnLoad = function()
 --	NePCR.Splash()
 	Rubim.meeleSpell = 49998
 --	print("Meele Spell: ".. GetSpellInfo(Rubim.meeleSpell) .. "(" .. Rubim.meeleSpell .. ")")
+	print("|cffFFFF00 ----------------------------------------------------------------------|r")
+	print("|cffFFFF00 --- |rCLASS NAME: |cffC41F3BUnholy |r")
+	print("|cffFFFF00 --- |rRecommended Talents: 1/1 - 2/2 - 3/2 - 4/1 - 5/Any - 6/2 - 7/3")
+	print("|cffFFFF00 --- |rRead the Readme avaiable at github.")
+	print("|cffFFFF00 ----------------------------------------------------------------------|r")
+
 	NeP.Interface:AddToggle({
 		key = 'useDS',
 		icon = 'Interface\\Icons\\spell_deathknight_butcher2.png',
@@ -20,7 +26,7 @@ local Shared = {
 	{{
 	{'Berserking'},
 	{'Blood Fury'},
-	}, 'player.rubimarea(7).enemies >= 1' },
+	}, 'player.area(7).enemies >= 1' },
 }
 
 local Util = {
@@ -66,7 +72,7 @@ local Valkyr = {
 --actions.valkyr+=/festering_strike,if=debuff.festering_wound.stack<8&cooldown.apocalypse.remains<5
 	{ 'Festering Strike' , { 'target.debuff(Festering Wound).count < 8' , 'player.spell(Apocalypse).cooldown < 5' }},
 --actions.valkyr+=/call_action_list,name=aoe,if=active_enemies>=2
-	{ AoE , { 'player.rubimarea(7).enemies >= 2' , 'toggle.aoe'}},
+	{ AoE , { 'player.area(7).enemies >= 2' , 'toggle.aoe'}},
 --actions.valkyr+=/festering_strike,if=debuff.festering_wound.stack<=3
 	{'Festering Strike', 'target.debuff(Festering Wound).count <= 3'},
 --actions.valkyr+=/scourge_strike,if=debuff.festering_wound.up
@@ -187,7 +193,7 @@ local Generic = {
 --actions.generic+=/defile
 	{'Defile'},
 --actions.generic+=/call_action_list,name=aoe,if=active_enemies>=2
-	{ AoE , { 'player.rubimarea(7).enemies >= 2' , 'toggle(aoe)'}},
+	{ AoE , { 'player.area(7).enemies >= 2' , 'toggle(aoe)'}},
 --actions.generic+=/call_action_list,name=instructors,if=equipped.132448 *-Need the equipped function
 	{ Instructors , 'player.equipped(132448)'},
 --actions.generic+=/call_action_list,name=standard,if=!talent.castigator.enabled&!equipped.132448
@@ -197,7 +203,6 @@ local Generic = {
 }
 
 local inCombat = {
-	{ "@Rubim.SetText('inCombat')" },
 	{ Healing , 'toggle(useDS)' },
 	{ 'Outbreak', '!target.debuff(Virulent Plague)' },
 	{ 'Dark Transformation' , 'player.runes <= 3' },
@@ -209,7 +214,7 @@ local outCombat = {
 	{Shared}
 }
 
-NeP.CR:Add(252, 'Rubim (WIP) Deathknight - Unholy', {
+NeP.CR:Add(252, 'WinnerRubim (WIP) Deathknight - Unholy', {
 		{'%pause', 'player.channeling'},
 		{Interrupts, 'target.interruptAt(15)'},
 		{Shared},
