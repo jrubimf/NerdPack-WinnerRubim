@@ -33,7 +33,8 @@ local exeOnLoad = function()
 end
 
 local Shared = {
-	{'Deadly Poison', '!player.buff(Deadly Poison)'},
+	{'Deadly Poison', {'!player.buff(Deadly Poison)', '!player.talent(6,1)'}},
+	{'Agonizing Poison', {'!player.buff(Agonizing Poison)', 'player.talent(6,1)'}},
 	{'Crippling Poison', '!player.buff(Crippling Poison)'},
 }
 
