@@ -89,3 +89,67 @@ NeP.DSL:Register("allstacked", function(target)
 	if allenemies > 0 and allenemies == closeenemies then arethey = true end
 	return arethey
 end)
+
+NeP.DSL:Register('RtB', function() --Credit to Xeer!
+  local int = 0
+  local bearing = false
+  local shark = false
+
+  -- Shark Infested Waters
+  if UnitBuff('player', GetSpellInfo(193357)) then
+      shark = true
+      int = int + 1
+  end
+
+  -- True Bearing
+  if UnitBuff('player', GetSpellInfo(193359)) then
+      bearing = true
+      int = int + 1
+  end
+
+  -- Jolly Roger
+  if UnitBuff('player', GetSpellInfo(199603)) then
+      int = int + 1
+  end
+
+  -- Grand Melee
+  if UnitBuff('player', GetSpellInfo(193358)) then
+      int = int + 1
+  end
+
+  -- Buried Treasure
+  if UnitBuff('player', GetSpellInfo(199600)) then
+      int = int + 1
+  end
+
+  -- Broadsides
+  if UnitBuff('player', GetSpellInfo(193356)) then
+      int = int + 1
+  end
+
+  -- If all six buffs are active:
+  if int == 6 then
+      return true --"LEEEROY JENKINS!"
+
+      -- If two or Shark/Bearing and AR/Curse active:
+  elseif int == 2 or int == 3 or ((bearing or shark) and ((UnitBuff("player", GetSpellInfo(13750)) or UnitDebuff("player", GetSpellInfo(202665))))) then
+      return true --"Keep."
+
+--[[
+      -- If only True Bearing
+  elseif bearing then
+      return true --"Keep. AR/Curse if ready."
+--]]
+
+      -- If only Shark or True Bearing and CDs ready
+  elseif (bearing or shark)  and ((GetSpellCooldown(13750) == 0) or (GetSpellCooldown(202665) == 0)) then
+      return true --"AR/Curse NOW and keep!"
+
+        --if we have only ONE bad buff BUT AR/curse is active:
+    elseif int ==1 and ((UnitBuff("player", GetSpellInfo(13750)) or UnitDebuff("player", GetSpellInfo(202665)))) then
+        return true
+    
+      -- If only one bad buff:
+  else return false --"Reroll now!"
+  end
+end)
