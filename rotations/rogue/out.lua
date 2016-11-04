@@ -111,7 +111,7 @@ local inCombat = {
 --variable,name=ss_useable_noreroll,value=(combo_points<5+talent.deeper_stratagem.enabled-(buff.broadsides.up|buff.jolly_roger.up)-(talent.alacrity.enabled&buff.alacrity.stack<=4))
 --variable,name=ss_useable,value=(talent.anticipation.enabled&combo_points<4)|(!talent.anticipation.enabled&((variable.rtb_reroll&combo_points<4+talent.deeper_stratagem.enabled)|(!variable.rtb_reroll&variable.ss_useable_noreroll)))
 --call_action_list,name=bf
-	{ bf },
+	{ bf, 'toggle(aoe)' },
 --call_action_list,name=cds
 	{ cds, 'toggle(cooldowns)&RtB'},
 --call_action_list,name=stealth,if=stealthed|cooldown.vanish.up|cooldown.shadowmeld.up
