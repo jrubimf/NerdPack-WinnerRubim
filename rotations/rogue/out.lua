@@ -10,24 +10,32 @@ local exeOnLoad = function()
 	print("|cffFFFF00 ----------------------------------------------------------------------|r")
 
 	NeP.Interface:AddToggle({
-		key = 'saveDS',
-		icon = 'Interface\\Icons\\spell_deathknight_butcher2.png',
-		name = 'Toggle Adrenaline Rush',
-		text = 'BOT will Only Death Strike when RP is Capped, useful on fights were you need to cast an active mitigation.'
+		key = 'useArush',
+		icon = 'Interface\\Icons\\spell_shadow_shadowworddominate',
+		name = 'Use Adrenaline Rush',
+		text = 'The cooldown toggle will use Adrenaline Rush'
+	})
+
+	NeP.Interface:AddToggle({
+		key = 'useCotDB',
+		icon = 'Interface\\Icons\\inv_sword_1h_artifactskywall_d_01dual',
+		name = 'Use Curse of the Dreadblades',
+		text = 'The cooldown toggle will use Curse of the Dreadblades'
 	})
 		
-	NeP.Interface:AddToggle({
-		key = 'bonestorm',
-		icon = 'Interface\\Icons\\Ability_deathknight_boneshield.png',
-		name = 'Use 194844',
-		text = 'This will pool RP to use 194844.'
-	})
 	
 	NeP.Interface:AddToggle({
-		key = 'aoetaunt',
-		icon = 'Interface\\Icons\\spell_nature_shamanrage.png',
-		name = 'Aoe Taunt',
-		text = 'Experimental AoE Taunt.'
+		key = 'trickstank1',
+		icon = 'Interface\\Icons\\ability_rogue_tricksofthetrade.png',
+		name = 'Tricks Tank 1',
+		text = 'Keep Tricks of the Trade up on tank1 - never on both'
+	 })	
+
+	NeP.Interface:AddToggle({
+		key = 'trickstank2',
+		icon = 'Interface\\Icons\\ability_rogue_tricksofthetrade.png',
+		name = 'Tricks Tank 2',
+		text = 'Keep Tricks of the Trade up on tank1 - never on both'
 	 })	
 	
 end
@@ -36,9 +44,15 @@ local Interrupts = {
 	{'Kick'},	
 }
 
+local Survival = {
+	{'Feint', 'boss1target.isself&!player.buff(Feint)||boss2target.isself&!player.buff(Feint)'},
+	{'Crimson Vial', 'player.health < 60'},	
+
+}
+
 local build = {
 --# Builders
---actions.build=ghostly_strike,if=combo_points.deficit>=1+buff.broadsides.up&!buff.curse_of_the_dreadblades.up&(debuff.ghostly_strike.remains<debuff.ghostly_strike.duration*0.3|(cooldown.curse_of_the_dreadblades.remains<3&debuff.ghostly_strike.remains<14))&(combo_points>=3|(variable.rtb_reroll&time>=10))
+--actions.build=ghostly_strike,if=comrbo_points.deficit>=1+buff.broadsides.up&!buff.curse_of_the_dreadblades.up&(debuff.ghostly_strike.remains<debuff.ghostly_strike.duration*0.3|(cooldown.curse_of_the_dreadblades.remains<3&debuff.ghostly_strike.remains<14))&(combo_points>=3|(variable.rtb_reroll&time>=10))
 --	{'Ghostly Strike', {'player.buff(Broadsides)', '!player.buff(Curse of the Dreadblades)', 'target.debuff(Ghostly Strike).duration < 2'}},
 --	{'Ghostly Strike', {'player.spell(Curse of the Dreadblades).cooldown > 1', 'player.combodeficit >= 1',  'target.debuff{Ghostly Strike).duration < 2'}},
 	{'Ghostly Strike', {'player.combodeficit >= 1',  'target.debuff(Ghostly Strike).duration < 2'}},
@@ -79,11 +93,12 @@ local cds = {
 --actions.cds+=/cannonball_barrage,if=spell_targets.cannonball_barrage>=1
 	
 --actions.cds+=/adrenaline_rush,if=!buff.adrenaline_rush.up&energy.deficit>0
-	{'Adrenaline Rush', 'player.energydeficit > 0'},
+	{'Adrenaline Rush', 'player.energydeficit > 0&toggle(useArush)'},
 --actions.cds+=/marked_for_death,target_if=min:target.time_to_die,if=target.time_to_die<combo_points.deficit|((raid_event.adds.in>40|buff.true_bearing.remains>15)&combo_points.deficit>=4+talent.deeper_strategem.enabled+talent.anticipation.enabled)
 --actions.cds+=/sprint,if=equipped.thraxis_tricksy_treads&!variable.ss_useable
 --actions.cds+=/curse_of_the_dreadblades,if=combo_points.deficit>=4&(!talent.ghostly_strike.enabled|debuff.ghostly_strike.up)
-	{'Curse of the Dreadblades', {'player.combodeficit >= 4', 'target.debuff(Ghostly Strike)'}},
+--	{'Curse of the Dreadblades', {'player.combodeficit >= 4', 'target.debuff(Ghostly Strike)'}},
+	{'Curse of the Dreadblades', 'player.combodeficit >= 4&target.debuff(Ghostly Strike)&toggle(useCotDB)'},
 
 }
 
@@ -114,7 +129,9 @@ local inCombat = {
 }
 
 local Shared = {
-	
+	{'Ambush', 'target.range<5&target.infront&player.buff(Stealth)'},
+	{'Tricks of the Trade', 'toggle(trickstank1&!tank1.buff(Tricks of the Trade)&!toggle(trickstank2)'},
+	{'Tricks of the Trade', 'toggle(trickstank2&!tank2.buff(Tricks of the Trade)&!toggle(trickstank1)'},
 }
 
 local outCombat = {
@@ -123,7 +140,8 @@ local outCombat = {
 
 NeP.CR:Add(260, 'WinnerRubim (WIP) Rogue - Outlaw', {
 		{'%pause', 'player.channeling'},
+		{Survival},
 		{Shared},
-		{Interrupts, 'target.interruptAt(24)'},
-		{inCombat, 'player.onmelee'}
+		{Interrupts, 'target.interruptAt(64)'},
+		{inCombat, 'target.range < 11'}
 	}, outCombat, exeOnLoad)
