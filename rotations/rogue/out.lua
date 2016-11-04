@@ -35,7 +35,7 @@ local exeOnLoad = function()
 		key = 'trickstank2',
 		icon = 'Interface\\Icons\\ability_rogue_tricksofthetrade.png',
 		name = 'Tricks Tank 2',
-		text = 'Keep Tricks of the Trade up on tank1 - never on both'
+		text = 'Keep Tricks of the Trade up on tank2 - never on both'
 	 })	
 	
 end
