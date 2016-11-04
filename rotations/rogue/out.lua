@@ -130,8 +130,8 @@ local inCombat = {
 
 local Shared = {
 	{'Ambush', 'target.range<5&target.infront&player.buff(Stealth)'},
-	{'Tricks of the Trade', 'toggle(trickstank1&!tank1.buff(Tricks of the Trade)&!toggle(trickstank2)'},
-	{'Tricks of the Trade', 'toggle(trickstank2&!tank2.buff(Tricks of the Trade)&!toggle(trickstank1)'},
+	{'Tricks of the Trade', 'toggle(trickstank1)&!tank1.buff(Tricks of the Trade)&!toggle(trickstank2)'},
+	{'Tricks of the Trade', 'toggle(trickstank2)&!tank2.buff(Tricks of the Trade)&!toggle(trickstank1)'},
 }
 
 local outCombat = {
