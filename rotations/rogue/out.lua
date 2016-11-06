@@ -1,4 +1,4 @@
-local _, Rubim = ...
+_, Rubim = ...
 
 local exeOnLoad = function()
 --	NePCR.Splash()
@@ -45,7 +45,7 @@ local Interrupts = {
 }
 
 local Survival = {
-	{'Feint', 'boss1target.isself&!player.buff(Feint)||boss2target.isself&!player.buff(Feint)'},
+	{'Feint', 'player.health < 50!player.buff(Feint)'},
 	{'Crimson Vial', 'player.health < 60'},	
 
 }
@@ -78,9 +78,9 @@ local bf = {
 --actions.bf=cancel_buff,name=blade_flurry,if=equipped.shivarran_symmetry&cooldown.blade_flurry.up&buff.blade_flurry.up&spell_targets.blade_flurry>=2|spell_targets.blade_flurry<2&buff.blade_flurry.up
 --	{'Blade Flurry', {'player.equipped()', 'player.area(7).enemies >= 2'}},
 --actions.bf+=/blade_flurry,if=spell_targets.blade_flurry>=2&!buff.blade_flurry.up
-	{'Blade Flurry', {'player.area(7).enemies > 3', '!player.buff(Blade Flurry)'}},
+	{'Blade Flurry', {'player.area(7).enemies > 2', '!player.buff(Blade Flurry)'}},
 	{'Blade Flurry', {'player.area(7).enemies <= 1', 'player.buff(Blade Flurry)'}},
-	{'Cannonball Barrage', 'player.area(7).enemies <= 3'},
+	{'Cannonball Barrage', 'player.area(7).enemies >= 3'},
 }
 
 local cds = {
@@ -111,7 +111,7 @@ local inCombat = {
 --variable,name=ss_useable_noreroll,value=(combo_points<5+talent.deeper_stratagem.enabled-(buff.broadsides.up|buff.jolly_roger.up)-(talent.alacrity.enabled&buff.alacrity.stack<=4))
 --variable,name=ss_useable,value=(talent.anticipation.enabled&combo_points<4)|(!talent.anticipation.enabled&((variable.rtb_reroll&combo_points<4+talent.deeper_stratagem.enabled)|(!variable.rtb_reroll&variable.ss_useable_noreroll)))
 --call_action_list,name=bf
-	{ bf, 'toggle(aoe)' },
+	{ bf, 'toggle(aoe)'},
 --call_action_list,name=cds
 	{ cds, 'toggle(cooldowns)&RtB'},
 --call_action_list,name=stealth,if=stealthed|cooldown.vanish.up|cooldown.shadowmeld.up
@@ -130,8 +130,8 @@ local inCombat = {
 
 local Shared = {
 	{'Ambush', 'target.range<5&target.infront&player.buff(Stealth)'},
-	{'Tricks of the Trade', 'toggle(trickstank1)&!tank1.buff(Tricks of the Trade)&!toggle(trickstank2)'},
-	{'Tricks of the Trade', 'toggle(trickstank2)&!tank2.buff(Tricks of the Trade)&!toggle(trickstank1)'},
+--	{'Tricks of the Trade', 'toggle(trickstank1)&!tank1.buff(Tricks of the Trade)&!toggle(trickstank2)'},
+--	{'Tricks of the Trade', 'toggle(trickstank2)&!tank2.buff(Tricks of the Trade)&!toggle(trickstank1)'},
 }
 
 local outCombat = {
