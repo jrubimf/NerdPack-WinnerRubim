@@ -1,4 +1,4 @@
-_, Rubim = ...
+local _, Rubim = ...
 
 local exeOnLoad = function()
 --	NePCR.Splash()
@@ -31,6 +31,13 @@ local exeOnLoad = function()
 		text = 'Keep Tricks of the Trade up on tank1 - never on both'
 	 })	
 
+NeP.Interface:AddToggle({
+		key = 'feint',
+		icon = 'Interface\\Icons\\ability_rogue_feint.png',
+		name = 'Use Feint',
+		text = 'Keep Feint Up'
+	 })	
+
 	NeP.Interface:AddToggle({
 		key = 'trickstank2',
 		icon = 'Interface\\Icons\\ability_rogue_tricksofthetrade.png',
@@ -45,7 +52,7 @@ local Interrupts = {
 }
 
 local Survival = {
-	{'Feint', 'player.health < 50&!player.buff(Feint)'},
+	{'Feint', 'toggle(feint)&player.health<=50&target.enemy&target.combat&target.inMelee&targettarget.isself&!player.buff(Feint)'},
 	{'Crimson Vial', 'player.health < 60'},	
 
 }
