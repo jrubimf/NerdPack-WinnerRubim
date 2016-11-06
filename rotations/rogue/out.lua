@@ -45,7 +45,7 @@ local Interrupts = {
 }
 
 local Survival = {
-	{'Feint', 'player.health < 50!player.buff(Feint)'},
+	{'Feint', 'player.health < 50&!player.buff(Feint)'},
 	{'Crimson Vial', 'player.health < 60'},	
 
 }
