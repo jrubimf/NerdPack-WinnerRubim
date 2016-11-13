@@ -23,13 +23,13 @@ local exeOnLoad = function()
 --		text = 'This will pool RP to use 194844.'
 --	})
 --	
---	NeP.Interface:AddToggle({
---		key = 'aoetaunt',
---		icon = 'Interface\\Icons\\spell_nature_shamanrage.png',
---		name = 'Aoe Taunt',
---		text = 'Experimental AoE Taunt.'
---	 })	
---	
+	NeP.Interface:AddToggle({
+		key = 'vanish',
+		icon = 'Interface\\Icons\\ability_vanish.png',
+		name = 'Auto Vanish',
+		text = 'BOT will vanish during rotation(disable if soloing)'
+	 })	
+
 end
 
 local Shared = {
@@ -53,11 +53,11 @@ local cds = {
 --actions.cds+=/marked_for_death,target_if=min:target.time_to_die,if=target.time_to_die<combo_points.deficit|combo_points.deficit>=5
 	{'Marked for Death', 'player.combopoints <= 2&player.energy >= 26'},
 --actions.cds+=/vendetta,if=talent.exsanguinate.enabled&cooldown.exsanguinate.remains<5&dot.rupture.ticking
-	{'Vendetta', 'player.lastcast(Kingsbane)player.talent(6,3)&spell.cooldown(Exsanguinate)<5&target.debuff(Rupture)&player.spell(Vanish).cooldown>=110'},
+	{'Vendetta', 'player.lastcast(Kingsbane)&player.talent(6,3)&target.debuff(Rupture).duration>1'},
 --actions.cds+=/vendetta,if=!talent.exsanguinate.enabled&(!artifact.urge_to_kill.enabled|energy.deficit>=70)
 	{'Vendetta', '!player.talent(6,3)&player.energydeficit>=70'},
 --actions.cds+=/vanish,if=talent.nightstalker.enabled&combo_points>=cp_max_spend&((talent.exsanguinate.enabled&cooldown.exsanguinate.remains<1&(dot.rupture.ticking|time>10))|(!talent.exsanguinate.enabled&dot.rupture.refreshable))
-	{'Vanish', 'player.talent(2,1)&player.combopoints>=6&player.spell(Exsanguinate).cooldown<=1&player.lastcast(Mutilate)&player.spell(Vendetta).cooldown<1'},
+	{'Vanish', 'toggle(vanish)&player.talent(2,1)&player.combopoints>=6&player.spell(Exsanguinate).cooldown<=1&player.lastcast(Mutilate)&player.spell(Vendetta).cooldown<1'},
 --actions.cds+=/vanish,if=talent.subterfuge.enabled&dot.garrote.refreshable&((spell_targets.fan_of_knives<=3&combo_points.deficit>=1+spell_targets.fan_of_knives)|(spell_targets.fan_of_knives>=4&combo_points.deficit>=4))
 --actions.cds+=/vanish,if=talent.shadow_focus.enabled&energy.time_to_max>=2&combo_points.deficit>=4
 --actions.cds+=/exsanguinate,if=prev_gcd.rupture&dot.rupture.remains>4+4*cp_max_spend
@@ -80,7 +80,7 @@ local finishers = {
 --# Finishers
 --actions.finish=death_from_above,if=combo_points>=cp_max_spend
 --actions.finish+=/envenom,if=combo_points>=cp_max_spend-talent.master_poisoner.enabled|(talent.elaborate_planning.enabled&combo_points>=3+!talent.exsanguinate.enabled&buff.elaborate_planning.remains<2)
-	{'Envenom', 'player.combopoints>=6&target.debuff(Rupture).duration>10||player.talent(1,2)&player.combopoints>=6&player.buff(Elaborate Planning).duration<2'},
+	{'Envenom', 'player.combopoints>=6&target.debuff(Rupture).duration>10||target.debuff(Rupture).duration>8&player.talent(1,2)&player.combopoints>=6&player.buff(Elaborate Planning).duration<2'},
 }
 
 local builders = {
