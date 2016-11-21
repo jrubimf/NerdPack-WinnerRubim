@@ -96,35 +96,48 @@ NeP.DSL:Register('RtB', function() --Credit to Xeer!
   local shark = false
 
   -- Shark Infested Waters
+-- Shark Infested Waters
   if UnitBuff('player', GetSpellInfo(193357)) then
-      shark = true
-      int = int + 1
+    if NeP.DSL:Get('buff.duration')('player', GetSpellInfo(193357)) > 3 then
+        shark = true
+        int = int + 1
+    end
   end
 
   -- True Bearing
   if UnitBuff('player', GetSpellInfo(193359)) then
-      bearing = true
-      int = int + 1
+    if NeP.DSL:Get('buff.duration')('player', GetSpellInfo(193359)) > 3 then
+        bearing = true
+        int = int + 1
+    end
   end
 
   -- Jolly Roger
   if UnitBuff('player', GetSpellInfo(199603)) then
-      int = int + 1
+    if NeP.DSL:Get('buff.duration')('player', GetSpellInfo(199603)) > 3 then
+        int = int + 1
+    end
   end
 
   -- Grand Melee
   if UnitBuff('player', GetSpellInfo(193358)) then
-      int = int + 1
+    if NeP.DSL:Get('buff.duration')('player', GetSpellInfo(193358)) > 3 then
+        int = int + 1
+    end
   end
 
   -- Buried Treasure
   if UnitBuff('player', GetSpellInfo(199600)) then
-      int = int + 1
+    if NeP.DSL:Get('buff.duration')('player', GetSpellInfo(199600)) > 3 then
+        int = int + 1
+    end
   end
 
   -- Broadsides
   if UnitBuff('player', GetSpellInfo(193356)) then
-      int = int + 1
+    if NeP.DSL:Get('buff.duration')('player', GetSpellInfo(193356)) > 3 then
+        int = int + 1
+    end
   end
 
   -- If all six buffs are active:
