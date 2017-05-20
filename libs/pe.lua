@@ -148,11 +148,9 @@ NeP.DSL:Register('RtB', function() --Credit to Xeer!
   elseif int == 2 or int == 3 or ((bearing or shark) and ((UnitBuff("player", GetSpellInfo(13750)) or UnitDebuff("player", GetSpellInfo(202665))))) then
       return true --"Keep."
 
---[[
       -- If only True Bearing
   elseif bearing then
       return true --"Keep. AR/Curse if ready."
---]]
 
       -- If only Shark or True Bearing and CDs ready
   elseif (bearing or shark)  and ((GetSpellCooldown(13750) == 0) or (GetSpellCooldown(202665) == 0)) then
