@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 70200
 ## Title: |r[|cff0070deNerdPack|r] Winner Rubim Combat Routines
 ## Notes: Wip
 ## Dependencies: NerdPack
