@@ -13,4 +13,12 @@
   <Script file="rotations\rogue\ass.lua" />  
   <Script file="rotations\rogue\sub.lua" />  
   <Script file="rotations\rogue\out.lua" />  
+
+  <Script file="rotations\warlock\demonology.lua" />  
+  <Script file="rotations\warlock\destruction.lua" />  
+  <Script file="rotations\warlock\affliction.lua" />  
+
+  <Script file="rotations\mage\frost.lua" />  
+  <Script file="rotations\mage\arcane.lua" />  
+  <Script file="rotations\mage\fire.lua" /> 
 </Ui>
